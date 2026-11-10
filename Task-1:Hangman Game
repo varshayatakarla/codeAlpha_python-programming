@@ -1,7 +1,7 @@
 
 import random
 
-# ---------------- WORD DATABASE ----------------
+#--------------- WORD DATABASE ----------------
 
 # Store words and hints according to difficulty levels
 words = {
