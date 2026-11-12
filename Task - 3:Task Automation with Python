@@ -1,0 +1,118 @@
+
+# ---------------- IMPORT MODULES ----------------
+
+# Import os to work with folders and files
+import os
+
+# Import shutil to move files
+import shutil
+
+
+# ---------------- FOLDER SETTINGS ----------------
+
+# Source folder containing all files
+source_folder = "My_Files"
+
+# Destination folders for different file types
+destination_folders = {
+    ".jpg": "Images",
+    ".jpeg": "Images",
+    ".png": "Images",
+    ".pdf": "PDF_Files",
+    ".txt": "Text_Files"
+}
+
+
+# ---------------- AUTOMATION FUNCTION ----------------
+
+def organize_files():
+
+    print("\n===================================")
+    print("       FILE AUTOMATION SYSTEM")
+    print("===================================")
+
+    # Check whether the source folder exists
+    if not os.path.exists(source_folder):
+
+        print("Source folder does not exist!")
+        return
+
+    # Get all files from the source folder
+    files = os.listdir(source_folder)
+
+    # Count successfully moved files
+    moved_count = 0
+
+    # Check each file one by one
+    for file_name in files:
+
+        # Create the complete source file path
+        source_path = os.path.join(source_folder, file_name)
+
+        # Skip folders and process only files
+        if not os.path.isfile(source_path):
+            continue
+
+        # Get the file extension
+        extension = os.path.splitext(file_name)[1].lower()
+
+        # Check whether the extension is supported
+        if extension in destination_folders:
+
+            # Get the destination folder name
+            folder_name = destination_folders[extension]
+
+            # Create the destination folder path
+            destination_path = os.path.join(
+                source_folder,
+                folder_name
+            )
+
+            # Create destination folder if it does not exist
+            os.makedirs(destination_path, exist_ok=True)
+
+            # Create the final file path
+            new_file_path = os.path.join(
+                destination_path,
+                file_name
+            )
+
+            # Check whether a file with the same name exists
+            if os.path.exists(new_file_path):
+
+                print(file_name, "already exists. Skipped.")
+                continue
+
+            # Move the file to its destination folder
+            try:
+
+                shutil.move(source_path, new_file_path)
+
+                print(file_name, "moved to", folder_name)
+
+                # Increase successful move count
+                moved_count += 1
+
+            except OSError:
+
+                print("Unable to move:", file_name)
+
+        else:
+
+            print(file_name, "- Unsupported file type.")
+
+    # ---------------- FINAL REPORT ----------------
+
+    print("\n===================================")
+    print("         AUTOMATION REPORT")
+    print("===================================")
+
+    print("Total files found:", len(files))
+    print("Files moved successfully:", moved_count)
+
+    print("\nFile organization completed!")
+
+
+# ---------------- MAIN PROGRAM ----------------
+
+organize_files()
