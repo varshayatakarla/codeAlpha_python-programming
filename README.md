@@ -1,10 +1,10 @@
 # codeAlpha_PythonProgramming
 
-## 📌 About the Project
+##  About the Project
 
 This repository contains three Python projects developed as part of my Python Internship. These projects helped me gain practical knowledge of Python programming and understand how programming concepts can be used to solve real-world problems.
 
-## 🚀 Projects Included
+## Projects Included
 
 ### 1. Hangman Game
 A fun word-guessing game where users try to guess a randomly selected hidden word.
@@ -44,12 +44,12 @@ A Python automation program that organizes files into separate folders based on 
 
 **Concepts Used:** OS Module, Shutil Module, File Handling, Dictionaries, Functions, and Exception Handling.
 
-## 🛠️ Technologies Used
+##  Technologies Used
 - **Programming Language:** Python 3
 - **Code Editor:** VS Code / Python IDLE
 - **Modules:** Random, OS, and Shutil
 
-## 📂 Project Structure
+##  Project Structure
 
 ```text
 Python_Internship_Tasks/
@@ -66,7 +66,7 @@ Python_Internship_Tasks/
 └── README.md
 ```
 
-## ▶️ How to Run
+## How to Run
 
 1. Download or clone this repository.
 2. Open the project folder in VS Code or Python IDLE.
@@ -81,7 +81,7 @@ python Task1_Hangman.py
 
 For Task 3, create a folder named `My_Files` and add sample files before running the program.
 
-## 📚 Learning Outcomes
+## Learning Outcomes
 
 Through these projects, I gained practical experience in:
 
@@ -92,7 +92,7 @@ Through these projects, I gained practical experience in:
 - Exception handling and input validation.
 - Developing interactive Python applications.
 
-## 👩‍💻 Author
+##  Author
 
 **Varsha Yatakarla**
 
@@ -101,7 +101,3 @@ Marwadi University
 
 **Technology:** Python
 
----
-
-⭐ Thank you for visiting my repository!  
-Suggestions and feedback are always welcome.
