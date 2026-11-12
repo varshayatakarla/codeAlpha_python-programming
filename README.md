@@ -92,12 +92,9 @@ Through these projects, I gained practical experience in:
 - Exception handling and input validation.
 - Developing interactive Python applications.
 
-##  Author
+##internship
 
-**Varsha Yatakarla**
-
-B.Tech – Computer Science and Engineering (AI & ML)  
-Marwadi University
-
-**Technology:** Python
+Organization: CodeAlpha
+Domain: Python Programming
+This repository represents my practical learning and implementation of Python Programming concepts during the internship
 
