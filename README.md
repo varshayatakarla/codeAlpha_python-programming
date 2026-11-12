@@ -95,6 +95,8 @@ Through these projects, I gained practical experience in:
 ## internship
 
 Organization: CodeAlpha
+
 Domain: Python Programming
+
 This repository represents my practical learning and implementation of Python Programming concepts during the internship
 
