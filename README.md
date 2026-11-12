@@ -92,7 +92,7 @@ Through these projects, I gained practical experience in:
 - Exception handling and input validation.
 - Developing interactive Python applications.
 
-##internship
+## internship
 
 Organization: CodeAlpha
 Domain: Python Programming
