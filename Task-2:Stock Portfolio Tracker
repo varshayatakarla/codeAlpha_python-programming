@@ -1,0 +1,154 @@
+
+# ---------------- STOCK DATABASE ----------------
+
+# Store stock names and their prices
+stock_prices = {
+    "AAPL": 180,
+    "TSLA": 250,
+    "GOOGL": 140,
+    "MSFT": 400,
+    "AMZN": 190,
+    "META": 300
+}
+
+
+# ---------------- PORTFOLIO FUNCTION ----------------
+
+def track_portfolio():
+
+    # Store all purchased stock details
+    portfolio = []
+
+    # Store total investment amount
+    total_investment = 0
+
+    print("\n===================================")
+    print("       STOCK PORTFOLIO TRACKER")
+    print("===================================")
+
+    # Display available stocks
+    print("\nAvailable Stocks:")
+
+    for stock, price in stock_prices.items():
+
+        print(stock, ":", "$", price)
+
+    # Ask the user how many stocks they want to enter
+    while True:
+
+        try:
+            number = int(input("\nHow many stocks do you have? "))
+
+            if number > 0:
+                break
+
+            print("Please enter a positive number.")
+
+        except ValueError:
+            print("Invalid input! Enter a number.")
+
+    # ---------------- GET STOCK DETAILS ----------------
+
+    for i in range(number):
+
+        print("\nStock", i + 1)
+
+        # Ask for stock name
+        stock_name = input("Enter stock name: ").upper().strip()
+
+        # Check whether the stock is available
+        if stock_name not in stock_prices:
+
+            print("Stock not available!")
+            continue
+
+        # Ask for stock quantity
+        try:
+            quantity = int(input("Enter quantity: "))
+
+            # Validate quantity
+            if quantity <= 0:
+                print("Quantity must be greater than zero.")
+                continue
+
+        except ValueError:
+            print("Invalid quantity!")
+            continue
+
+        # Get stock price
+        price = stock_prices[stock_name]
+
+        # Calculate total value of this stock
+        investment = price * quantity
+
+        # Add investment to the portfolio total
+        total_investment += investment
+
+        # Store stock information
+        portfolio.append({
+            "name": stock_name,
+            "price": price,
+            "quantity": quantity,
+            "investment": investment
+        })
+
+        # Display stock details
+        print("Stock Price: $", price)
+        print("Quantity:", quantity)
+        print("Investment Value: $", investment)
+
+    # ---------------- PORTFOLIO SUMMARY ----------------
+
+    print("\n===================================")
+    print("          PORTFOLIO SUMMARY")
+    print("===================================")
+
+    print("\nStock Name | Price | Quantity | Total")
+
+    # Display all stored stock details
+    for stock in portfolio:
+
+        print(
+            stock["name"],
+            "|", stock["price"],
+            "|", stock["quantity"],
+            "|", stock["investment"]
+        )
+
+    # Display total investment
+    print("\nTotal Investment: $", total_investment)
+
+    # ---------------- SAVE PORTFOLIO ----------------
+
+    # Save portfolio information in a text file
+    try:
+
+        with open("portfolio.txt", "w") as file:
+
+            file.write("STOCK PORTFOLIO REPORT\n")
+            file.write("======================\n\n")
+
+            for stock in portfolio:
+
+                file.write(
+                    "Stock: " + stock["name"] +
+                    "\nPrice: $" + str(stock["price"]) +
+                    "\nQuantity: " + str(stock["quantity"]) +
+                    "\nInvestment: $" + str(stock["investment"]) +
+                    "\n\n"
+                )
+
+            file.write(
+                "Total Investment: $" + str(total_investment)
+            )
+
+        print("\nPortfolio saved successfully!")
+
+    except OSError:
+
+        print("Unable to save portfolio file.")
+
+
+# ---------------- MAIN PROGRAM ----------------
+
+track_portfolio()
