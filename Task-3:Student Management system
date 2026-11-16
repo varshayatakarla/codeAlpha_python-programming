@@ -1,0 +1,156 @@
+
+import csv
+from pathlib import Path
+
+# -------- STUDENT RECORD MANAGEMENT SYSTEM --------
+
+FILE = Path("students.csv")
+
+
+# Load student records
+def load_students():
+    if FILE.exists():
+        with open(FILE, "r", newline="") as f:
+            return list(csv.DictReader(f))
+    return []
+
+
+# Save records in CSV file
+def save_students(students):
+    fields = ["roll", "name", "total", "average", "grade"]
+
+    with open(FILE, "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(students)
+
+
+# Calculate grade
+def calculate_grade(average):
+    if average >= 90:
+        return "A"
+    elif average >= 80:
+        return "B"
+    elif average >= 70:
+        return "C"
+    elif average >= 60:
+        return "D"
+    else:
+        return "F"
+
+
+# Add a new student
+def add_student():
+    students = load_students()
+
+    roll = input("Enter Roll Number: ").strip()
+
+    if not roll:
+        print("Roll number cannot be empty!")
+        return
+
+    if any(s["roll"] == roll for s in students):
+        print("Student already exists!")
+        return
+
+    name = input("Enter Student Name: ").strip()
+
+    if not name:
+        print("Name cannot be empty!")
+        return
+
+    marks = []
+
+    for i in range(1, 4):
+        while True:
+            try:
+                mark = float(input(f"Enter Subject {i} Marks: "))
+
+                if 0 <= mark <= 100:
+                    marks.append(mark)
+                    break
+                else:
+                    print("Marks must be between 0 and 100.")
+
+            except ValueError:
+                print("Please enter a valid number.")
+
+    total = sum(marks)
+    average = total / 3
+    grade = calculate_grade(average)
+
+    students.append({
+        "roll": roll,
+        "name": name,
+        "total": total,
+        "average": round(average, 2),
+        "grade": grade
+    })
+
+    save_students(students)
+    print("\nStudent record added successfully!")
+
+
+# Display all students
+def view_students():
+    students = load_students()
+
+    if not students:
+        print("No student records found!")
+        return
+
+    print("\n------ STUDENT RECORDS ------")
+
+    for s in students:
+        print(
+            f"Roll: {s['roll']} | "
+            f"Name: {s['name']} | "
+            f"Total: {s['total']} | "
+            f"Average: {s['average']} | "
+            f"Grade: {s['grade']}"
+        )
+
+
+# Search student by roll number
+def search_student():
+    students = load_students()
+    roll = input("Enter Roll Number to Search: ").strip()
+
+    for s in students:
+        if s["roll"] == roll:
+            print("\nStudent Found!")
+            print("Name:", s["name"])
+            print("Total:", s["total"])
+            print("Average:", s["average"])
+            print("Grade:", s["grade"])
+            return
+
+    print("Student not found!")
+
+
+# Main menu
+def main():
+    while True:
+        print("\n===== STUDENT MANAGEMENT SYSTEM =====")
+        print("1. Add Student")
+        print("2. View Students")
+        print("3. Search Student")
+        print("4. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            add_student()
+        elif choice == "2":
+            view_students()
+        elif choice == "3":
+            search_student()
+        elif choice == "4":
+            print("Thank you for using the system!")
+            break
+        else:
+            print("Invalid choice! Try again.")
+
+
+if __name__ == "__main__":
+    main()
